@@ -123,7 +123,7 @@ uninstall() {
     systemctl reset-failed
     rm /etc/x-ui/ -rf
     rm /usr/local/x-ui/ -rf
-    rm -rf goxui.sh
+    rm -rf goxui.sh acme.sh
     sed -i '/goxui.sh/d' /etc/crontab >/dev/null 2>&1
     echo ""
     echo -e "卸载成功，如果你想删除此脚本，则退出脚本后运行 ${green}rm /usr/bin/x-ui -f${plain} 进行删除"
@@ -276,6 +276,7 @@ migrate_v2_ui() {
 
 acme() {
    wget -N https://cdn.jsdelivr.net/gh/kkkyg/acme-script/acme.sh && ./acme.sh
+   chmod +x /root/acme.sh
     echo ""
     before_show_menu
 }
