@@ -275,8 +275,7 @@ migrate_v2_ui() {
 }
 
 acme() {
-   wget -N https://cdn.jsdelivr.net/gh/kkkyg/acme-script/acme.sh && ./acme.sh
-   chmod +x /root/acme.sh
+   wget -N https://raw.githubusercontent.com/kkkyg/acme-script/main/acme.sh && chmod +x acme.sh && ./acme.sh
     echo ""
     before_show_menu
 }
