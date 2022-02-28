@@ -108,7 +108,11 @@ iptables -t mangle -F
 iptables -F
 iptables -X
 netfilter-persistent save
-
+v4=$(curl -s4m3 https://ip.gs)
+if [ -z $v4 ]; then
+echo -e "${green}检测到VPS为纯IPV6 Only,添加dns64${plain}\n"
+echo -e nameserver 2a01:4f8:c2c:123f::1 > /etc/resolv.conf
+fi
     if [[ x"${release}" == x"centos" ]]; then
         yum install wget curl tar -y
     else
@@ -197,7 +201,7 @@ grep -qE "^ **/1 * * * * root bash /root/goxui.sh >/dev/null 2>&1" /etc/crontab 
     echo -e "----------------------------------------------"
 }
 
-echo -e "${green}开始安装x-ui必要依赖2222${plain}"
+echo -e "${green}开始安装x-ui必要依赖3333${plain}"
 install_base
 echo -e "${green}开始安装x-ui核心组件${plain}"
 install_x-ui $1
