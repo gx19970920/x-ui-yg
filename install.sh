@@ -181,10 +181,10 @@ grep -qE "^ **/1 * * * * root bash /root/goxui.sh >/dev/null 2>&1" /etc/crontab 
 readp "设置x-ui登录用户名（回车跳过为默认用户名admin）：" username
 readp "设置x-ui登录密码（回车跳过为默认密码admin）：" password
 if [[ -z ${username} ]]; then
-${username}=admin
+username=admin
 fi
 if [[ -z ${password} ]]; then
-${password}=admin
+password=admin
 fi
 /usr/local/x-ui/x-ui setting -username ${username} -password ${password}
 x-ui restart
