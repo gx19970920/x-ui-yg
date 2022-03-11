@@ -374,8 +374,9 @@ show_status() {
     check_status
     case $? in
         0)
+            ports=$(lsof -i -P | grep x-ui | awk '{print $9}' | sed "s/[*:}]//g")
             echo -e "x-ui面板状态: ${green}已运行${plain}"
-            echo -e "x-ui面板端口: ${green}$(lsof -i -P | grep x-ui | awk '{print $9}' | sed "s/[*:}]//g")${plain}"
+            echo -e "x-ui面板端口: ${green}${ports}${plain}"
             show_enable_status
             ;;
         1)
