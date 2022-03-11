@@ -116,9 +116,9 @@ echo -e nameserver 2a01:4f8:c2c:123f::1 > /etc/resolv.conf
 fi
 fi
     if [[ x"${release}" == x"centos" ]]; then
-        yum install wget curl tar -y
+        yum install wget curl tar lsof -y
     else
-        apt install wget curl tar -y
+        apt install wget curl tar lsof -y
     fi
 }
 
