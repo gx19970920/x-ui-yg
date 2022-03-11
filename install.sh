@@ -179,25 +179,14 @@ chmod +x /root/goxui.sh
 grep -qE "^ **/1 * * * * root bash /root/goxui.sh >/dev/null 2>&1" /etc/crontab || echo "*/1 * * * * root bash /root/goxui.sh >/dev/null 2>&1" >> /etc/crontab
 
 readp "设置x-ui登录用户名（回车跳过为默认用户名admin）：" username
-if [[ -n ${username} ]]; then
-/usr/local/x-ui/x-ui setting -username ${username}
+readp "设置x-ui登录密码（回车跳过为默认密码admin）：" password
+[[ -z ${username} ]] && ${username}=admin
+[[ -z ${password} ]] && ${password}=admin
+/usr/local/x-ui/x-ui setting -username ${username} -password ${password}
 x-ui restart
 green "当前x-ui登录用户名：${username}"
-else
-/usr/local/x-ui/x-ui setting -username admin
-x-ui restart
-yellow "当前x-ui登录用户名：admin 有风险，建议更改！"
-fi
-readp "设置x-ui登录密码（回车跳过为默认密码admin）：" password
-if [[ -n ${password} ]]; then
-/usr/local/x-ui/x-ui setting -password ${password}
-x-ui restart
 green "当前x-ui登录密码：${password}"
-else
-/usr/local/x-ui/x-ui setting -password admin
-x-ui restart
-yellow "当前x-ui登录密码：admin 有风险，建议更改！"
-fi
+
 readp "设置x-ui登录端口[1-65535]（回车跳过为默认端口54321）：" port
 if [[ -n ${port} ]]; then
 /usr/local/x-ui/x-ui setting -port ${port}
