@@ -108,6 +108,13 @@ iptables -t mangle -F
 iptables -F
 iptables -X
 netfilter-persistent save
+if [[ -z $(grep 'DiG 9' /etc/hosts) ]]; then
+v4=$(curl -s4m3 https://ip.gs)
+if [ -z $v4 ]; then
+echo -e "${green}检测到VPS为纯IPV6 Only,添加dns64${plain}\n"
+echo -e nameserver 2a01:4f8:c2c:123f::1 > /etc/resolv.conf
+fi
+fi
     if [[ x"${release}" == x"centos" ]]; then
         yum install wget curl tar -y
     else
