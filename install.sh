@@ -198,6 +198,7 @@ else
 /usr/local/x-ui/x-ui setting -port 54321 >/dev/null 2>&1
 x-ui restart
 fi
+echo -e ""
 yellow "请稍等3秒，检测IP环境，输出x-ui登录信息……"
 echo -e ""
 ports=$(lsof -i -P | grep x-ui | awk '{print $9}' | sed "s/[*:}]//g")
