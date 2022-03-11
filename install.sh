@@ -186,14 +186,14 @@ fi
 if [[ -z ${password} ]]; then
 password=admin
 fi
-/usr/local/x-ui/x-ui setting -username ${username} -password ${password}
+/usr/local/x-ui/x-ui setting -username ${username} -password ${password} >/dev/null 2>&1
 x-ui restart
 green "当前x-ui登录用户名：${username}"
 green "当前x-ui登录密码：${password}"
-
+sleep 1
 readp "设置x-ui登录端口[1-65535]（回车跳过为默认端口54321）：" port
 if [[ -n ${port} ]]; then
-/usr/local/x-ui/x-ui setting -port ${port}
+/usr/local/x-ui/x-ui setting -port ${port} >/dev/null 2>&1
 echo -e ""
 x-ui restart
 green "当前x-ui登录端口：${port}"
