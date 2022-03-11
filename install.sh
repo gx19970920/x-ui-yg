@@ -206,9 +206,9 @@ v4=$(curl -s4m3 https://ip.gs)
 v6=$(curl -s6m3 https://ip.gs)
 systemctl stop wg-quick@wgcf >/dev/null 2>&1
 if [ -z $v4 ]; then
-int="请在浏览器地址栏输入[$v6]:$ports进入x-ui登录界面"
+int="请在浏览器地址栏输入  [$v6]:$ports  进入x-ui登录界面"
 else
-int="请在浏览器地址栏输入[$v4]:$ports进入x-ui登录界面"
+int="请在浏览器地址栏输入  $v4:$ports  进入x-ui登录界面"
 fi
 
     echo -e "请自行确保此端口没有被其他程序占用，${yellow}并且确保 ${ports} 端口已放行${plain}"
