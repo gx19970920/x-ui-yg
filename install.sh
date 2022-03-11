@@ -161,7 +161,7 @@ install_x-ui() {
     systemctl daemon-reload
     systemctl enable x-ui
     systemctl start x-ui
-echo -e "${green}安装每分种自检x-ui的守护进程${plain}" 
+green "安装每分种自检x-ui的守护进程" 
 sleep 2
 cat>/root/goxui.sh<<-\EOF
 #!/bin/bash
