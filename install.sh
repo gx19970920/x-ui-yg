@@ -205,7 +205,7 @@ fi
 
     echo -e "${green}x-ui-yg V${last_version}${plain} 安装完成，面板已启动，"
     echo -e ""
-    echo -e "当前x-ui网页端口为 ${green}54321{plain}，用户名和密码默认都是 ${green}admin${plain}"
+    echo -e "当前x-ui网页端口为 ${green}54321${plain}，用户名和密码默认都是 ${green}admin${plain}"
     echo -e "请自行确保此端口没有被其他程序占用，${yellow}并且确保 54321 端口已放行${plain}"
     echo -e ""
     echo -e "x-ui 管理脚本使用方法: "
