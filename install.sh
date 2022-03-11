@@ -200,6 +200,7 @@ x-ui restart
 fi
 echo -e ""
 ports=$(lsof -i -P | grep x-ui | awk '{print $9}' | sed "s/[*:}]//g")
+yellow "请稍等3秒，x-ui登录信息如下……"
 wgcfv6=$(curl -s6m6 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 wgcfv4=$(curl -s4m6 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 xuilogin(){
@@ -220,7 +221,9 @@ systemctl start wg-quick@wgcf >/dev/null 2>&1
 fi
 sleep 1
     echo -e "请自行确保端口${ports}没有被其他程序占用，${yellow}并且确保 ${ports} 端口已放行${plain}"
-    echo -e "${green}x-ui-yg V${last_version}${plain} 安装完成，面板已启动，"
+    echo -e ""
+    echo -e "${green}x-ui-yg V${last_version}${plain} 安装完成，面板已启动"
+    sleep 1
     echo -e ""
     green "$int"
     echo -e ""
