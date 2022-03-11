@@ -207,7 +207,7 @@ ports=$(lsof -i -P | grep x-ui | awk '{print $9}' | sed "s/[*:}]//g")
     echo -e ""
     echo -e "x-ui 管理脚本使用方法: "
     echo -e "----------------------------------------------"
-    echo -e "x-ui              - 显示管理菜单 (集成一键AMCE申请证书)"
+    echo -e "x-ui              - 显示管理菜单 (集成一键AMCE申请证书、端口显示)"
     echo -e "x-ui start        - 启动 x-ui 面板"
     echo -e "x-ui stop         - 停止 x-ui 面板"
     echo -e "x-ui restart      - 重启 x-ui 面板"
