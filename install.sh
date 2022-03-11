@@ -198,11 +198,9 @@ else
 /usr/local/x-ui/x-ui setting -port 54321 >/dev/null 2>&1
 x-ui restart
 fi
+yellow "请稍等3秒，检测IP环境，输出x-ui登录信息……"
 echo -e ""
 ports=$(lsof -i -P | grep x-ui | awk '{print $9}' | sed "s/[*:}]//g")
-yellow "请稍等3秒，x-ui登录信息如下……"
-wgcfv6=$(curl -s6m6 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
-wgcfv4=$(curl -s4m6 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
 xuilogin(){
 v4=$(curl -s4m3 https://ip.gs)
 v6=$(curl -s6m3 https://ip.gs)
@@ -212,6 +210,8 @@ else
 int="请在浏览器地址栏输入  $v4:$ports  进入x-ui登录界面\n当前x-ui登录用户名：${username}\n当前x-ui登录密码：${password}"
 fi
 }
+wgcfv6=$(curl -s6m6 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2)
+wgcfv4=$(curl -s4m6 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2)
 if [[ ! $wgcfv4 =~ on|plus && ! $wgcfv6 =~ on|plus ]]; then
 xuilogin
 else
