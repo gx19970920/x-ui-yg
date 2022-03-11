@@ -206,13 +206,9 @@ xuilogin(){
 v4=$(curl -s4m3 https://ip.gs)
 v6=$(curl -s6m3 https://ip.gs)
 if [ -z $v4 ]; then
-int="请在浏览器地址栏输入  [$v6]:$ports  进入x-ui登录界面"
-green "当前x-ui登录用户名：${username}"
-green "当前x-ui登录密码：${password}"
+int="请在浏览器地址栏输入  [$v6]:$ports  进入x-ui登录界面\n当前x-ui登录用户名：${username}\n当前x-ui登录密码：${password}"
 else
-int="请在浏览器地址栏输入  $v4:$ports  进入x-ui登录界面"
-green "当前x-ui登录用户名：${username}"
-green "当前x-ui登录密码：${password}"
+int="请在浏览器地址栏输入  $v4:$ports  进入x-ui登录界面\n当前x-ui登录用户名：${username}\n当前x-ui登录密码：${password}"
 fi
 }
 if [[ ! $wgcfv4 =~ on|plus && ! $wgcfv6 =~ on|plus ]]; then
