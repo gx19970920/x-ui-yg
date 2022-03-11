@@ -180,8 +180,12 @@ grep -qE "^ **/1 * * * * root bash /root/goxui.sh >/dev/null 2>&1" /etc/crontab 
 
 readp "设置x-ui登录用户名（回车跳过为默认用户名admin）：" username
 readp "设置x-ui登录密码（回车跳过为默认密码admin）：" password
-[[ -z ${username} ]] && ${username}=admin
-[[ -z ${password} ]] && ${password}=admin
+if [[ -z ${username} ]]; then
+${username}=admin
+fi
+if [[ -z ${password} ]]; then
+${password}=admin
+fi
 /usr/local/x-ui/x-ui setting -username ${username} -password ${password}
 x-ui restart
 green "当前x-ui登录用户名：${username}"
@@ -190,6 +194,7 @@ green "当前x-ui登录密码：${password}"
 readp "设置x-ui登录端口[1-65535]（回车跳过为默认端口54321）：" port
 if [[ -n ${port} ]]; then
 /usr/local/x-ui/x-ui setting -port ${port}
+echo -e ""
 x-ui restart
 green "当前x-ui登录端口：${port}"
 else
@@ -200,11 +205,8 @@ fi
 
     echo -e "${green}x-ui-yg V${last_version}${plain} 安装完成，面板已启动，"
     echo -e ""
-    echo -e "如果是全新安装，默认网页端口为 ${green}54321${plain}，用户名和密码默认都是 ${green}admin${plain}"
+    echo -e "当前x-ui网页端口为 ${green}54321{plain}，用户名和密码默认都是 ${green}admin${plain}"
     echo -e "请自行确保此端口没有被其他程序占用，${yellow}并且确保 54321 端口已放行${plain}"
-    echo -e "若想将 54321 修改为其它端口，输入 x-ui 命令进行修改，同样也要确保你修改的端口也是放行的"
-    echo -e ""
-    echo -e "如果是更新面板，则按你之前的方式访问面板"
     echo -e ""
     echo -e "x-ui 管理脚本使用方法: "
     echo -e "----------------------------------------------"
