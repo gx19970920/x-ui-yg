@@ -374,15 +374,16 @@ show_status() {
     check_status
     case $? in
         0)
-            echo -e "面板状态: ${green}已运行${plain}"
+            echo -e "x-ui面板状态: ${green}已运行${plain}"
+            echo -e "x-ui面板端口: ${green}$(lsof -i -P | grep x-ui | awk '{print $9}' | sed "s/[*:}]//g")${plain}"
             show_enable_status
             ;;
         1)
-            echo -e "面板状态: ${yellow}未运行${plain}"
+            echo -e "x-ui面板状态: ${yellow}未运行${plain}"
             show_enable_status
             ;;
         2)
-            echo -e "面板状态: ${red}未安装${plain}"
+            echo -e "x-ui面板状态: ${red}未安装${plain}"
     esac
     show_xray_status
 }
