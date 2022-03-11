@@ -194,7 +194,6 @@ sleep 1
 readp "设置x-ui登录端口[1-65535]（回车跳过为默认端口54321）：" port
 if [[ -n ${port} ]]; then
 /usr/local/x-ui/x-ui setting -port ${port} >/dev/null 2>&1
-echo -e ""
 x-ui restart
 green "当前x-ui登录端口：${port}"
 else
@@ -203,10 +202,8 @@ x-ui restart
 yellow "当前x-ui登录端口：54321 有风险，建议更改！"
 fi
 ports=$(lsof -i -P | grep x-ui | awk '{print $9}' | sed "s/[*:}]//g")
-
-    echo -e "${green}x-ui-yg V${last_version}${plain} 安装完成，面板已启动，"
-    echo -e ""
     echo -e "请自行确保此端口没有被其他程序占用，${yellow}并且确保 ${ports} 端口已放行${plain}"
+    echo -e "${green}x-ui-yg V${last_version}${plain} 安装完成，面板已启动，"
     echo -e ""
     echo -e "x-ui 管理脚本使用方法: "
     echo -e "----------------------------------------------"
