@@ -215,6 +215,7 @@ else
 int="请在浏览器地址栏输入  $v4:$ports  进入x-ui登录界面"
 green "当前x-ui登录用户名：${username}"
 green "当前x-ui登录密码：${password}"
+fi
 }
 if [[ ! $wgcfv4 =~ on|plus && ! $wgcfv6 =~ on|plus ]]; then
 xuilogin
