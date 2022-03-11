@@ -188,19 +188,15 @@ password=admin
 fi
 /usr/local/x-ui/x-ui setting -username ${username} -password ${password} >/dev/null 2>&1
 x-ui restart
-green "当前x-ui登录用户名：${username}"
-green "当前x-ui登录密码：${password}"
 sleep 1
 echo -e ""
 readp "设置x-ui登录端口[1-65535]（回车跳过为默认端口54321）：" port
 if [[ -n ${port} ]]; then
 /usr/local/x-ui/x-ui setting -port ${port} >/dev/null 2>&1
 x-ui restart
-green "当前x-ui登录端口：${port}"
 else
-/usr/local/x-ui/x-ui setting -port 54321
+/usr/local/x-ui/x-ui setting -port 54321 >/dev/null 2>&1
 x-ui restart
-yellow "当前x-ui登录端口：54321 有风险，建议更改！"
 fi
 echo -e ""
 ports=$(lsof -i -P | grep x-ui | awk '{print $9}' | sed "s/[*:}]//g")
@@ -209,11 +205,15 @@ v4=$(curl -s4m3 https://ip.gs)
 v6=$(curl -s6m3 https://ip.gs)
 if [ -z $v4 ]; then
 int="请在浏览器地址栏输入  [$v6]:$ports  进入x-ui登录界面"
+green "当前x-ui登录用户名：${username}"
+green "当前x-ui登录密码：${password}"
 else
 int="请在浏览器地址栏输入  $v4:$ports  进入x-ui登录界面"
+green "当前x-ui登录用户名：${username}"
+green "当前x-ui登录密码：${password}"
 fi
 
-    echo -e "请自行确保此端口没有被其他程序占用，${yellow}并且确保 ${ports} 端口已放行${plain}"
+    echo -e "请自行确保端口${ports}没有被其他程序占用，${yellow}并且确保 ${ports} 端口已放行${plain}"
     echo -e "${green}x-ui-yg V${last_version}${plain} 安装完成，面板已启动，"
     echo -e ""
     green "$int"
