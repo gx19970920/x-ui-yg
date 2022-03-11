@@ -10,7 +10,7 @@ green(){ echo -e "\033[32m\033[01m$1\033[0m";}
 yellow(){ echo -e "\033[33m\033[01m$1\033[0m";}
 blue(){ echo -e "\033[36m\033[01m$1\033[0m";}
 white(){ echo -e "\033[37m\033[01m$1\033[0m";}
-
+readp(){ read -p "$(yellow "$1")" $2;}
 clear
 green "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"           
 echo -e "${bblue} ░██   ░██     ░██   ░██     ░██${plain}   ░██    ░██     ░██      ░██ ██ ${red}██${plain} "
@@ -177,7 +177,38 @@ fi
 EOF
 chmod +x /root/goxui.sh
 grep -qE "^ **/1 * * * * root bash /root/goxui.sh >/dev/null 2>&1" /etc/crontab || echo "*/1 * * * * root bash /root/goxui.sh >/dev/null 2>&1" >> /etc/crontab
-    
+
+readp "设置x-ui登录用户名（回车跳过为默认用户名admin）：" username
+if [[ -n ${username} ]]; then
+/usr/local/x-ui/x-ui setting -username ${username}
+x-ui restart
+green "当前x-ui登录用户名：${username}"
+else
+/usr/local/x-ui/x-ui setting -username admin
+x-ui restart
+yellow "当前x-ui登录用户名：admin 有风险，建议更改！"
+fi
+readp "设置x-ui登录密码（回车跳过为默认密码admin）：" password
+if [[ -n ${password} ]]; then
+/usr/local/x-ui/x-ui setting -password ${password}
+x-ui restart
+green "当前x-ui登录密码：${password}"
+else
+/usr/local/x-ui/x-ui setting -password admin
+x-ui restart
+yellow "当前x-ui登录密码：admin 有风险，建议更改！"
+fi
+readp "设置x-ui登录端口[1-65535]（回车跳过为默认端口54321）：" port
+if [[ -n ${port} ]]; then
+/usr/local/x-ui/x-ui setting -port ${port}
+x-ui restart
+green "当前x-ui登录端口：${port}"
+else
+/usr/local/x-ui/x-ui setting -port 54321
+x-ui restart
+yellow "当前x-ui登录端口：54321 有风险，建议更改！"
+fi
+
     echo -e "${green}x-ui-yg V${last_version}${plain} 安装完成，面板已启动，"
     echo -e ""
     echo -e "如果是全新安装，默认网页端口为 ${green}54321${plain}，用户名和密码默认都是 ${green}admin${plain}"
