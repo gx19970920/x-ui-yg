@@ -51,6 +51,23 @@ elif [[ x"${release}" == x"debian" ]]; then
     fi
 fi
 
+xuigo(){
+cat>/root/goxui.sh<<-\EOF
+#!/bin/bash
+xui=`ps -aux |grep "x-ui" |grep -v "grep" |wc -l`
+xray=`ps -aux |grep "xray" |grep -v "grep" |wc -l`
+sleep 1
+if [ $xui = 0 ];then
+x-ui restart
+fi
+if [ $xray = 0 ];then
+x-ui restart
+fi
+EOF
+chmod +x /root/goxui.sh
+grep -qE "^ **/1 * * * * root bash /root/goxui.sh >/dev/null 2>&1" /etc/crontab || echo "*/1 * * * * root bash /root/goxui.sh >/dev/null 2>&1" >> /etc/crontab
+}
+
 confirm() {
     if [[ $# > 1 ]]; then
         echo && read -p "$1 [默认$2]: " temp
@@ -179,6 +196,7 @@ start() {
         echo -e "${green}面板已运行，无需再次启动，如需重启请选择重启${plain}"
     else
         systemctl start x-ui
+        xuigo
         sleep 2
         check_status
         if [[ $? == 0 ]]; then
@@ -200,12 +218,14 @@ stop() {
         echo -e "${green}面板已停止，无需再次停止${plain}"
     else
         systemctl stop x-ui
+        rm -rf goxui.sh
+        sed -i '/goxui.sh/d' /etc/crontab >/dev/null 2>&1
         sleep 2
         check_status
         if [[ $? == 1 ]]; then
             echo -e "${green}x-ui 与 xray 停止成功${plain}"
         else
-            echo -e "${red}面板停止失败，可能是因为停止时间超过了两秒，请稍后查看日志信息${plain}"
+            echo -e "${red}面板停止失败，停止X-UI守护进程中……请稍在一分钟后再查看，请稍后查看日志信息${plain}"
         fi
     fi
 
@@ -216,6 +236,7 @@ stop() {
 
 restart() {
     systemctl restart x-ui
+    xuigo
     sleep 2
     check_status
     if [[ $? == 0 ]]; then
