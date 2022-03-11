@@ -200,7 +200,11 @@ x-ui restart
 fi
 echo -e ""
 ports=$(lsof -i -P | grep x-ui | awk '{print $9}' | sed "s/[*:}]//g")
-systemctl stop wg-quick@wgcf >/dev/null 2>&1
+checkwgcf(){
+wgcfv6=$(curl -s6m6 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
+wgcfv4=$(curl -s4m6 https://www.cloudflare.com/cdn-cgi/trace -k | grep warp | cut -d= -f2) 
+}
+xuilogin(){
 v4=$(curl -s4m3 https://ip.gs)
 v6=$(curl -s6m3 https://ip.gs)
 if [ -z $v4 ]; then
@@ -211,8 +215,15 @@ else
 int="请在浏览器地址栏输入  $v4:$ports  进入x-ui登录界面"
 green "当前x-ui登录用户名：${username}"
 green "当前x-ui登录密码：${password}"
+}
+if [[ ! $wgcfv4 =~ on|plus && ! $wgcfv6 =~ on|plus ]]; then
+xuilogin
+else
+systemctl stop wg-quick@wgcf >/dev/null 2>&1
+xuilogin
+systemctl start wg-quick@wgcf >/dev/null 2>&1
 fi
-
+sleep 1
     echo -e "请自行确保端口${ports}没有被其他程序占用，${yellow}并且确保 ${ports} 端口已放行${plain}"
     echo -e "${green}x-ui-yg V${last_version}${plain} 安装完成，面板已启动，"
     echo -e ""
