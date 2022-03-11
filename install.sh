@@ -202,9 +202,18 @@ x-ui restart
 yellow "当前x-ui登录端口：54321 有风险，建议更改！"
 fi
 ports=$(lsof -i -P | grep x-ui | awk '{print $9}' | sed "s/[*:}]//g")
+v4=$(curl -s4m3 https://ip.gs)
+v6=$(curl -s6m3 https://ip.gs)
+systemctl stop wg-quick@wgcf >/dev/null 2>&1
+if [ -z $v4 ]; then
+int="请在浏览器地址栏输入[$v6]:$ports进入x-ui登录界面"
+else
+int="请在浏览器地址栏输入[$v4]:$ports进入x-ui登录界面"
+fi
+
     echo -e "请自行确保此端口没有被其他程序占用，${yellow}并且确保 ${ports} 端口已放行${plain}"
     echo -e "${green}x-ui-yg V${last_version}${plain} 安装完成，面板已启动，"
-    echo -e ""
+    green "$int"
     echo -e "x-ui 管理脚本使用方法: "
     echo -e "----------------------------------------------"
     echo -e "x-ui              - 显示管理菜单 (集成一键AMCE申请证书、端口显示)"
