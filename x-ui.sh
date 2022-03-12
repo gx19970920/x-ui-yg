@@ -296,13 +296,13 @@ migrate_v2_ui() {
 }
 
 acme() {
-   wget -N https://raw.githubusercontent.com/kkkyg/acme-script/main/acme.sh && chmod +x acme.sh && ./acme.sh
+   wget -N https://raw.githubusercontents.com/kkkyg/acme-script/main/acme.sh && chmod +x acme.sh && ./acme.sh
     echo ""
     before_show_menu
 }
 
 bbr() {
-bash <(curl -L -s https://raw.githubusercontent.com/kkkyg/across/master/bbr.sh)
+bash <(curl -L -s https://raw.githubusercontents.com/kkkyg/across/master/bbr.sh)
     echo ""
     before_show_menu
 }
