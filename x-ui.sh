@@ -374,7 +374,7 @@ show_status() {
     check_status
     case $? in
         0)
-            ports=$(ss -tlp |grep x-ui | awk '{print $4}'| sed "s/[*:}]//g")
+            ports=$(/usr/local/x-ui/x-ui 2>&1 | grep tcp | awk '{print $5}' | sed "s/://g")
             echo -e "x-ui面板状态: ${green}已运行${plain}"
             echo -e "x-ui面板端口: ${green}${ports}${plain}"
             show_enable_status
