@@ -199,7 +199,7 @@ x-ui restart
 echo -e ""
 yellow "请稍等3秒，检测IP环境，输出x-ui登录信息……"
 echo -e ""
-ports=$(ss -tlp |grep x-ui | awk '{print $4}'| sed "s/[*:}]//g")
+ports=$(/usr/local/x-ui/x-ui 2>&1 | grep tcp | awk '{print $5}' | sed "s/://g")
 xuilogin(){
 v4=$(curl -s4m3 https://ip.gs -k)
 v6=$(curl -s6m3 https://ip.gs -k)
