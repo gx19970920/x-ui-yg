@@ -116,9 +116,9 @@ echo -e nameserver 2a01:4f8:c2c:123f::1 > /etc/resolv.conf
 fi
 fi
     if [[ x"${release}" == x"centos" ]]; then
-        yum install wget curl tar lsof -y
+        yum install wget curl tar -y
     else
-        apt install wget curl tar lsof -y
+        apt install wget curl tar -y
     fi
 }
 
@@ -201,7 +201,7 @@ fi
 echo -e ""
 yellow "请稍等3秒，检测IP环境，输出x-ui登录信息……"
 echo -e ""
-ports=$(lsof -i -P | grep x-ui | awk '{print $9}' | sed "s/[*:}]//g")
+ports=$(ss -tlp |grep x-ui | awk '{print $4}'| sed "s/[*:}]//g")
 xuilogin(){
 v4=$(curl -s4m3 https://ip.gs -k)
 v6=$(curl -s6m3 https://ip.gs -k)
