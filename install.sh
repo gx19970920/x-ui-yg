@@ -193,10 +193,8 @@ echo -e ""
 readp "设置x-ui登录端口[1-65535]（回车跳过为默认端口54321）：" port
 if [[ -n ${port} ]]; then
 /usr/local/x-ui/x-ui setting -port ${port} >/dev/null 2>&1
-x-ui restart
 else
 /usr/local/x-ui/x-ui setting -port 54321 >/dev/null 2>&1
-x-ui restart
 fi
 echo -e ""
 yellow "请稍等3秒，检测IP环境，输出x-ui登录信息……"
@@ -221,9 +219,9 @@ xuilogin
 systemctl start wg-quick@wgcf >/dev/null 2>&1
 fi
 sleep 1
-    echo -e "请自行确保端口${ports}没有被其他程序占用，${yellow}并且确保 ${ports} 端口已放行${plain}"
+    yellow "请自行确保端口${ports}没有被其他程序占用，并且确保 ${ports} 端口已放行"
     echo -e ""
-    echo -e "${green}x-ui-yg V${last_version}${plain} 安装完成，面板已启动"
+    green "x-ui-yg V${last_version}版本安装完成，面板已启动"
     sleep 1
     echo -e ""
     green "$int"
