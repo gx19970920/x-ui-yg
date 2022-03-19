@@ -12,4 +12,3 @@ bash <(curl -Ls https://raw.githubusercontents.com/kkkyg/x-ui-yg/main/install.sh
 
 小白独享说明图[全网首发：x-ui面版登录设置解析图，代理节点参数解析图，纯IPV4、纯IPV6登录X-UI面板的多种情况，以及cloudflare小黄云及端口的来龙去脉](https://kkkyg.blogspot.com/2022/03/x-uiipv4ipv6cloudflare.html)
 
-YOUTBE视频演示说明即将发布
