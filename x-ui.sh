@@ -65,7 +65,8 @@ x-ui restart
 fi
 EOF
 chmod +x /root/goxui.sh
-grep -qE "^ **/1 * * * * root bash /root/goxui.sh >/dev/null 2>&1" /etc/crontab || echo "*/1 * * * * root bash /root/goxui.sh >/dev/null 2>&1" >> /etc/crontab
+sed -i '/goxui.sh/d' /etc/crontab >/dev/null 2>&1
+echo "*/1 * * * * root bash /root/goxui.sh >/dev/null 2>&1" >> /etc/crontab
 }
 
 confirm() {
