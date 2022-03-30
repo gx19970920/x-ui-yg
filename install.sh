@@ -95,7 +95,7 @@ fi
 
 install_base() {
 vi=`systemd-detect-virt`
-if [[ $vi =~ lxc|openvz ]]; then
+if [[ $vi = openvz ]]; then
 TUN=$(cat /dev/net/tun 2>&1)
 if [[ ${TUN} != "cat: /dev/net/tun: File descriptor in bad state" ]]; then 
 red "检测到未开启TUN，现尝试添加TUN支持" && sleep 2
