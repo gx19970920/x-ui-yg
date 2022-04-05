@@ -161,6 +161,7 @@ install_x-ui() {
         wget -N --no-check-certificate -O /usr/local/x-ui-linux-${arch}.tar.gz https://cdn.jsdelivr.net/gh/kkkyg/x-ui-yg/x-ui-linux-${arch}.tar.gz
         if [[ $? -ne 0 ]]; then
             echo -e "${red}下载 x-ui 失败，请确保你的服务器能够下载 Github 的文件${plain}"
+            rm -rf install.sh
             exit 1
         fi
     else
@@ -170,6 +171,7 @@ install_x-ui() {
         wget -N --no-check-certificate -O /usr/local/x-ui-linux-${arch}.tar.gz ${url}
         if [[ $? -ne 0 ]]; then
             echo -e "${red}下载 x-ui v$1 失败，请确保此版本存在${plain}"
+            rm -rf install.sh
             exit 1
         fi
     fi
@@ -269,6 +271,7 @@ sleep 1
     echo -e "x-ui install      - 安装 x-ui 面板"
     echo -e "x-ui uninstall    - 卸载 x-ui 面板"
     echo -e "----------------------------------------------"
+    rm -rf install.sh
 }
 
 echo -e "${green}开始安装x-ui必要依赖${plain}"
