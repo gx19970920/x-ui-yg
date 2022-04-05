@@ -94,6 +94,11 @@ elif [[ x"${release}" == x"debian" ]]; then
 fi
 
 install_base() {
+if [[ x"${release}" == x"centos" ]]; then
+yum install wget curl tar -y
+else
+apt install wget curl tar -y
+fi
 vi=`systemd-detect-virt`
 if [[ $vi = openvz ]]; then
 TUN=$(cat /dev/net/tun 2>&1)
@@ -142,11 +147,6 @@ echo -e "${green}检测到VPS为纯IPV6 Only,添加dns64${plain}\n"
 echo -e nameserver 2a01:4f8:c2c:123f::1 > /etc/resolv.conf
 fi
 fi
-    if [[ x"${release}" == x"centos" ]]; then
-        yum install wget curl tar -y
-    else
-        apt install wget curl tar -y
-    fi
 }
 
 install_x-ui() {
