@@ -95,9 +95,9 @@ fi
 
 install_base() {
 if [[ x"${release}" == x"centos" ]]; then
-yum install wget curl tar -y
+yum install epel-release -y && yum install wget curl tar -y
 else
-apt install wget curl tar -y
+apt update && apt install wget curl tar -y
 fi
 vi=`systemd-detect-virt`
 if [[ $vi = openvz ]]; then
