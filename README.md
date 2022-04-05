@@ -5,7 +5,7 @@
 纯IPV4/纯IPV6的VPS直接运行以下一键脚本
 
 ```
-bash <(curl -Ls https://raw.githubusercontents.com/kkkyg/x-ui-yg/main/install.sh)
+wget -N https://raw.githubusercontents.com/kkkyg/x-ui-yg/main/install.sh && bash install.sh
 ```
 
 相关更新说明请查看[甬哥博客](https://kkkyg.blogspot.com/2022/02/x-uiacmex-uiipv4ipv6v4v6vpsvaxilux-ui.html)
