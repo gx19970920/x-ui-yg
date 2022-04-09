@@ -154,10 +154,6 @@ install_x-ui() {
     cd /usr/local/
 
     if  [ $# == 0 ] ;then
-        vaxilu_version=$(curl -Ls "https://api.github.com/repos/vaxilu/x-ui/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-        last_version=$(curl -Ls "https://api.github.com/repos/kkkyg/x-ui-yg/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-        echo -e "${green}检测到上游端 x-ui 最新版本：V${vaxilu_version}${plain}"
-        echo -e "${green}开始安装当前 x-ui-yg 最新版本：V${last_version}${plain}"
         wget -N --no-check-certificate -O /usr/local/x-ui-linux-${arch}.tar.gz https://cdn.jsdelivr.net/gh/kkkyg/x-ui-yg/x-ui-linux-${arch}.tar.gz
         if [[ $? -ne 0 ]]; then
             echo -e "${red}下载 x-ui 失败，请确保你的服务器能够下载 Github 的文件${plain}"
@@ -251,7 +247,7 @@ fi
 sleep 1
     yellow "请自行确保端口${ports}没有被其他程序占用，并且确保 ${ports} 端口已放行"
     echo -e ""
-    green "x-ui-yg V${last_version}版本安装完成，面板已启动"
+    green "x-ui-yg 安装完成，面板已启动"
     sleep 1
     echo -e ""
     green "$int"
